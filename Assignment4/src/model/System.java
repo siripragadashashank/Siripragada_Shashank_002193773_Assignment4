@@ -4,6 +4,9 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author sirip
@@ -11,7 +14,13 @@ package model;
 public class System {
     private PatientDirectory patientDirectory;
     private PersonDirectory personDirectory;
-    private City city;
+    private ArrayList<City> cities;
+
+    public System(PatientDirectory patientDirectory, PersonDirectory personDirectory, ArrayList<City> cities) {
+        this.patientDirectory = patientDirectory;
+        this.personDirectory = personDirectory;
+        this.cities = cities;
+    }
     
     public PatientDirectory getPatientDirectory() {
         return patientDirectory;
@@ -29,13 +38,12 @@ public class System {
         this.personDirectory = personDirectory;
     }
 
-    public City getCity() {
-        return city;
+    public ArrayList<City> getCities() {
+        return cities;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setCities(ArrayList<City> cities) {
+        this.cities = cities;
     }
-    
     
 }
