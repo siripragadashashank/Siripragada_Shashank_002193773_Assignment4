@@ -9,6 +9,33 @@ package model;
  * @author sirip
  */
 public class System {
-    PatientDirectory patientDirectory;
-    PersonDirectory personDirectory;
+    private PatientDirectory patientDirectory;
+    private PersonDirectory personDirectory;
+    private City city;
+    
+    public PatientDirectory getPatientDirectory() {
+        return patientDirectory;
+    }
+
+    public void setPatientDirectory(PatientDirectory patientDirectory) {
+        this.patientDirectory = patientDirectory;
+    }
+
+    public PersonDirectory getPersonDirectory() {
+        return personDirectory;
+    }
+
+    public void setPersonDirectory(PersonDirectory personDirectory) {
+        this.personDirectory = personDirectory;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+    
+    
 }

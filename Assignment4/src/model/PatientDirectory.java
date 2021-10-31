@@ -4,10 +4,29 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author sirip
  */
 public class PatientDirectory {
+    private ArrayList<Patient> patientList;
+
+    public PatientDirectory(ArrayList<Patient> patientList) {
+        this.patientList = patientList;
+    }
+
+    public ArrayList<Patient> getPatientList() {
+        return patientList;
+    }
+
+    public void setPatientList(ArrayList<Patient> PatientList) {
+        this.patientList = PatientList;
+    }
+    
+    public void addNewPatient(Patient patient){
+        patientList.add(patient);
+    }
     
 }

@@ -9,5 +9,18 @@ package model;
  * @author sirip
  */
 public class Encounter {
+    private VitalSigns vitalSigns;
+
+    public Encounter(VitalSigns vitalSigns) {
+        this.vitalSigns = vitalSigns;
+    }
+    
+    public VitalSigns getVitalSigns() {
+        return vitalSigns;
+    }
+
+    public void setVitalSigns(VitalSigns vitalSigns) {
+        this.vitalSigns = vitalSigns;
+    }
     
 }

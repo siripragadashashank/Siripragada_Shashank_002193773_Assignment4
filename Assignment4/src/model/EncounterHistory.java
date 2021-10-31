@@ -4,10 +4,27 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author sirip
  */
 public class EncounterHistory {
+    private ArrayList<Encounter> encounterHistory;
+
+    public EncounterHistory(ArrayList<Encounter> encounterHistory) {
+        this.encounterHistory = encounterHistory;
+     
+    }
+
+    public ArrayList<Encounter> getEncounterHistory() {
+        return encounterHistory;
+    }
+
+    public void setEncounterHistory(ArrayList<Encounter> encounterHistory) {
+        this.encounterHistory = encounterHistory;
+    }
+    
     
 }
