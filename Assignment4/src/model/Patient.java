@@ -9,6 +9,19 @@ package model;
  * @author sirip
  */
 public class Patient {
-    private String name;
+    
+    private EncounterHistory encounterHistory;
+
+    public Patient(EncounterHistory encounterHistory) {
+        this.encounterHistory = encounterHistory;
+    }
+
+    public EncounterHistory getEncounterHistory() {
+        return encounterHistory;
+    }
+
+    public void setEncounterHistory(EncounterHistory encounterHistory) {
+        this.encounterHistory = encounterHistory;
+    }
     
 }
