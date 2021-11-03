@@ -4,6 +4,10 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import model.SampleData;
+import model.System;
+
 /**
  *
  * @author sirip
@@ -13,10 +17,17 @@ public class MainJFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainJFrame
      */
+    private System system;
+    
     public MainJFrame() {
         initComponents();
+        initializeData();
     }
+   
 
+    private void initializeData() {
+        system = SampleData.initData();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,21 +37,87 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane = new javax.swing.JSplitPane();
+        controlJPanel = new javax.swing.JPanel();
+        btnViewUpdate = new javax.swing.JButton();
+        btnTrackAbnormal = new javax.swing.JButton();
+        displayJPanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jSplitPane.setDividerLocation(140);
+
+        btnViewUpdate.setText("View/Manage");
+        btnViewUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewUpdateActionPerformed(evt);
+            }
+        });
+
+        btnTrackAbnormal.setText("Track Abnormal");
+        btnTrackAbnormal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrackAbnormalActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout controlJPanelLayout = new javax.swing.GroupLayout(controlJPanel);
+        controlJPanel.setLayout(controlJPanelLayout);
+        controlJPanelLayout.setHorizontalGroup(
+            controlJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlJPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(controlJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTrackAbnormal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnViewUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        controlJPanelLayout.setVerticalGroup(
+            controlJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlJPanelLayout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(btnViewUpdate)
+                .addGap(39, 39, 39)
+                .addComponent(btnTrackAbnormal)
+                .addContainerGap(278, Short.MAX_VALUE))
+        );
+
+        jSplitPane.setLeftComponent(controlJPanel);
+
+        displayJPanel.setMinimumSize(new java.awt.Dimension(687, 449));
+        displayJPanel.setLayout(new java.awt.CardLayout());
+        jSplitPane.setRightComponent(displayJPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 796, Short.MAX_VALUE)
+            .addComponent(jSplitPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 592, Short.MAX_VALUE)
+            .addComponent(jSplitPane)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnViewUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUpdateActionPerformed
+        // TODO add your handling code here:
+        SystemJPanel sysJPanel = new SystemJPanel(displayJPanel, system);
+        displayJPanel.add("System",sysJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_btnViewUpdateActionPerformed
+
+    private void btnTrackAbnormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrackAbnormalActionPerformed
+        // TODO add your handling code here:
+        AbnormalJPanel trackJPanel = new AbnormalJPanel(system);
+        //jSplitPane.setRightComponent(trackJPanel);
+        displayJPanel.add("TrackPanel", trackJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_btnTrackAbnormalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +155,10 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTrackAbnormal;
+    private javax.swing.JButton btnViewUpdate;
+    private javax.swing.JPanel controlJPanel;
+    private javax.swing.JPanel displayJPanel;
+    private javax.swing.JSplitPane jSplitPane;
     // End of variables declaration//GEN-END:variables
 }

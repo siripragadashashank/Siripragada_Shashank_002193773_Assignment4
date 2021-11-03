@@ -4,6 +4,7 @@
  */
 package ui;
 
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,12 +24,12 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
     /**
      * Creates new form EncounterHistoryJPanel
      */
-    private JPanel displayPanel;
+    private JPanel displayJPanel;
     private System system;
     private Person person;
     
-    public EncounterHistoryJPanel(JPanel displayJpanel, System system, Person person) {
-        this.displayPanel = displayPanel;
+    public EncounterHistoryJPanel(JPanel displayJPanel, System system, Person person) {
+        this.displayJPanel = displayJPanel;
         this.system=system;
         this.person=person;
         initComponents();
@@ -45,13 +46,14 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
         
         for(Encounter encounter:encounters) {
             
-            Object[] row = new Object[9];
+            Object[] row = new Object[7];
             row[0] = encounter.getVitalSigns();
             row[1] = encounter.getVitalSigns().getPulse();
-            row[2] = encounter.getVitalSigns().getBloodPressure();
-            row[3] = encounter.getVitalSigns().getRespirationRate();
-            row[4] = encounter.getVitalSigns().getSpo2();
-            row[5] = encounter.getVitalSigns().getBmi();
+            row[2] = encounter.getVitalSigns().getSbp();
+            row[3] = encounter.getVitalSigns().getDbp();
+            row[4] = encounter.getVitalSigns().getRespirationRate();
+            row[5] = encounter.getVitalSigns().getSpo2();
+            row[6] = encounter.getVitalSigns().getBmi();
             
             model.addRow(row);
         }
@@ -71,20 +73,21 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         btnViewUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        backJButton = new javax.swing.JButton();
 
         tblEncounterHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Temperature", "Pulse", "Blood Pressure", "Respiration Rate", "SpO2", "BMI"
+                "Temperature", "Pulse", "Systolic BP", "Diastolic BP", "Respiration Rate", "SpO2", "BMI"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -98,8 +101,18 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
         lblHeadingEncounterHistory.setText("Patient Encounter Vital Signs");
 
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnViewUpdate.setText("View/Update");
+        btnViewUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -108,33 +121,44 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
             }
         });
 
+        backJButton.setText("<< Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(221, 221, 221)
-                .addComponent(lblHeadingEncounterHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
+                .addGap(93, 93, 93)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(75, 75, 75))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92)
+                        .addComponent(lblHeadingEncounterHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(273, 273, 273)
                         .addComponent(btnAdd)
                         .addGap(18, 18, 18)
                         .addComponent(btnViewUpdate)
                         .addGap(27, 27, 27)
-                        .addComponent(btnDelete)
-                        .addGap(96, 96, 96))))
+                        .addComponent(btnDelete)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(lblHeadingEncounterHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHeadingEncounterHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backJButton))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -162,6 +186,42 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
         encounters.remove(selectedIndex);
         refreshView();
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        CardLayout cardLayout =  (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_backJButtonActionPerformed
+
+    private void btnViewUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUpdateActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex  = tblEncounterHistory.getSelectedRow();
+        if(selectedIndex < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to View/Update");
+            return;
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblEncounterHistory.getModel();
+        VitalSigns vitalSignsToUpdate = (VitalSigns) model.getValueAt(selectedIndex, 0);
+        navigateToVitalSignView(vitalSignsToUpdate);
+    }//GEN-LAST:event_btnViewUpdateActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        VitalSignsAddJPanel vitalSignsAddJPanel = new VitalSignsAddJPanel(displayJPanel, system, person);
+        displayJPanel.add("AddVitalSigns", vitalSignsAddJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_btnAddActionPerformed
+    
+    private void navigateToVitalSignView(VitalSigns vitalSigns) {
+        
+        VitalSignsUpdateJPanel vitalSignsJPanel = new VitalSignsUpdateJPanel(displayJPanel, system, vitalSigns);
+        displayJPanel.add("ViewVitalSigns",vitalSignsJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }
     
     private void refreshView() {
         
@@ -170,6 +230,7 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnViewUpdate;

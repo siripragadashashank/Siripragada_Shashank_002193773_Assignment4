@@ -6,12 +6,17 @@ package ui;
 
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.City;
 import model.Community;
+import model.House;
+import model.Patient;
+import model.Person;
+import model.SampleData;
 import model.System;
 
 /**
@@ -25,16 +30,20 @@ public class CommunityJPanel extends javax.swing.JPanel {
      */
     private System system;
     private JPanel displayJPanel;
-    private String selectedCity;
     private City city;
     
-    public CommunityJPanel(JPanel displayJPanel, System system, String selectedCity) {
+    public CommunityJPanel(JPanel displayJPanel, System system, City city) {
         
         this.displayJPanel=displayJPanel;
         this.system=system;
-        this.selectedCity=selectedCity;
+        this.city = city;
         initComponents();
+        initializeData();
         populateTable();
+        
+    }
+    private void initializeData() {
+        this.system = SampleData.initData();
     }
     public void populateTable() {
         
@@ -42,18 +51,15 @@ public class CommunityJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         
         for(City city:system.getCities()) {
-            if(city.getCityName().equalsIgnoreCase(selectedCity)){
-                this.city=city;
-                for(Community community:city.getCommunities()){
-                    Object[] row = new Object[4];
-                    row[0]=community;
-                    row[1]=formatDate(community.getLastUpdatedDate());
-                    
-                    model.addRow(row);
-                }
+            for(Community community:city.getCommunities()){
+                Object[] row = new Object[1];
+                row[0]=community;
+
+                model.addRow(row);
             }
         }
-        
+
+           
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,25 +81,18 @@ public class CommunityJPanel extends javax.swing.JPanel {
 
         communityJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Community Name", "Updated On"
+                "Community Name"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -153,18 +152,20 @@ public class CommunityJPanel extends javax.swing.JPanel {
                         .addComponent(communitiesJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(123, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, 0)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(219, 219, 219))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(addJButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(viewJButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(deleteJButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(goJButton))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63))))
+                                .addComponent(goJButton)
+                                .addGap(200, 200, 200))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,15 +174,15 @@ public class CommunityJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(communitiesJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backJButton))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(goJButton)
                     .addComponent(deleteJButton)
                     .addComponent(viewJButton)
                     .addComponent(addJButton))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -209,6 +210,22 @@ public class CommunityJPanel extends javax.swing.JPanel {
         showHousesInCommunity(selectedRow);
     }//GEN-LAST:event_goJButtonActionPerformed
 
+    
+    private void showHousesInCommunity(int selectedRow) {
+        
+        DefaultTableModel model = (DefaultTableModel) communityJTable.getModel();
+        Community community = (Community) model.getValueAt(selectedRow, 0);
+        navigateToHouses(community);
+    }
+    
+    private void navigateToHouses(Community community){
+        
+        HouseJPanel houseJPanel = new HouseJPanel(displayJPanel,system,community);
+        displayJPanel.add("HouseInformation", houseJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }
+    
     private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed
         // TODO add your handling code here:
 
@@ -220,18 +237,18 @@ public class CommunityJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) communityJTable.getModel();
         Community community = (Community) model.getValueAt(selectedRow, 0);
 
-        List<Person> personsToRemove = new ArrayList<>();
-        List<House> houses = community.getHouses();
+        ArrayList<Person> personsToRemove = new ArrayList<>();
+        ArrayList<House> houses = community.getCommunityHouses();
         for(House house:houses) {
             personsToRemove.addAll(house.getPersons());
         }
-        List<Patient> patientsToRemove = new ArrayList<>();
+        ArrayList<Patient> patientsToRemove = new ArrayList<>();
         for(Person person:personsToRemove) {
             patientsToRemove.add(person.getPatient());
         }
 
-        system.getPersonDirectory().getPersons().removeAll(personsToRemove);
-        system.getPatientDirectory().getPatients().removeAll(patientsToRemove);
+        system.getPersonDirectory().getPersonList().removeAll(personsToRemove);
+        system.getPatientDirectory().getPatientList().removeAll(patientsToRemove);
 
         city.getCommunities().remove(community);
 
@@ -256,7 +273,7 @@ public class CommunityJPanel extends javax.swing.JPanel {
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
         // TODO add your handling code here:
-        AddCommunityJPanel addCommunityJPanel = new AddCommunityJPanel(displayJPanel, city);
+        AddCommunityJPanel addCommunityJPanel = new AddCommunityJPanel(displayJPanel);
         displayJPanel.add("AddCommunityScreen", addCommunityJPanel);
         CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
         cardLayout.next(displayJPanel);

@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,12 @@ import java.util.List;
 public class City {
     private String cityName;
     
-    private List<Community> Communities;
+    private ArrayList<Community> Communities;
+
+    public City(String cityName, ArrayList<Community> Communities) {
+        this.cityName = cityName;
+        this.Communities = Communities;
+    }
 
     public String getCityName() {
         return cityName;
@@ -23,13 +29,16 @@ public class City {
         this.cityName = cityName;
     }
 
-    public List<Community> getCommunities() {
+    public ArrayList<Community> getCommunities() {
         return Communities;
     }
 
-    public void setCommunities(List<Community> Communities) {
+    public void setCommunities(ArrayList<Community> Communities) {
         this.Communities = Communities;
     }
     
-    
+    @Override
+    public String toString() {
+        return cityName;
+    }
 }

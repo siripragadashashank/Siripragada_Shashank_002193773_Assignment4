@@ -4,6 +4,14 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.House;
+import model.Person;
+import model.System;
+
 /**
  *
  * @author sirip
@@ -13,10 +21,31 @@ public class PersonJPanel extends javax.swing.JPanel {
     /**
      * Creates new form PersonJPanel
      */
-    public PersonJPanel() {
+    private JPanel displayJPanel;
+    private System system;
+    private House house;
+    
+    public PersonJPanel(JPanel displayJpanel, System system, House house) {
+        this.displayJPanel=displayJpanel;
+        this.system=system;
+        this.house=house;
         initComponents();
+        populateTable();
     }
 
+    public void populateTable() {
+        
+        DefaultTableModel model = (DefaultTableModel) personsJTable.getModel();
+        model.setRowCount(0);
+        
+        for(Person person:house.getPersons()){
+            Object[] row = new Object[5];
+            row[0]=person;
+            row[1]=person.getAge();
+            
+            model.addRow(row);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,19 +55,212 @@ public class PersonJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        personsJTable = new javax.swing.JTable();
+        backJButton = new javax.swing.JButton();
+        deletejButton = new javax.swing.JButton();
+        viewjButton = new javax.swing.JButton();
+        addjButton = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
+        personsJLabel = new javax.swing.JLabel();
+
+        personsJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Person Name", "Age"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(personsJTable);
+
+        backJButton.setText("<< Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+
+        deletejButton.setText("Delete");
+        deletejButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletejButtonActionPerformed(evt);
+            }
+        });
+
+        viewjButton.setText("View/Update");
+        viewjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewjButtonActionPerformed(evt);
+            }
+        });
+
+        addjButton.setText("Add");
+        addjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addjButtonActionPerformed(evt);
+            }
+        });
+
+        btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        personsJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        personsJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        personsJLabel.setText("Persons List");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109)
+                        .addComponent(personsJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(279, 279, 279)
+                        .addComponent(addjButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(viewjButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deletejButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNext))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(240, 240, 240)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(187, 187, 187))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(personsJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backJButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNext)
+                    .addComponent(deletejButton)
+                    .addComponent(viewjButton)
+                    .addComponent(addjButton))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        CardLayout cardLayout =  (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_backJButtonActionPerformed
+
+    private void deletejButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletejButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex = personsJTable.getSelectedRow();
+        if(selectedIndex < 0){
+            JOptionPane.showMessageDialog(this, "Please select a row to delete Person");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) personsJTable.getModel();
+        Person person = (Person) model.getValueAt(selectedIndex, 0);
+        house.getPersons().remove(person);
+        system.getPersonDirectory().getPersonList().remove(person);
+        system.getPatientDirectory().getPatientList().remove(person.getPatient());
+        populateTable();
+
+    }//GEN-LAST:event_deletejButtonActionPerformed
+
+    private void viewjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewjButtonActionPerformed
+        // TODO add your handling code here:
+
+        int selectedIndex = personsJTable.getSelectedRow();
+        if(selectedIndex < 0){
+            JOptionPane.showMessageDialog(this, "Please select a row to Display Person");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) personsJTable.getModel();
+        Person person = (Person) model.getValueAt(selectedIndex, 0);
+        navigateToPersonView(person);
+    }//GEN-LAST:event_viewjButtonActionPerformed
+
+    private void addjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addjButtonActionPerformed
+        // TODO add your handling code here:
+        AddPersonJPanel addPersonJPanel = new AddPersonJPanel(displayJPanel, system, house);
+        displayJPanel.add("AddPersonPanel", addPersonJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_addjButtonActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = personsJTable.getSelectedRow();
+        if(selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please Select any Person to View his Medical History");
+            return;
+        }
+
+        showPatientInfo(selectedRow);
+    }//GEN-LAST:event_btnNextActionPerformed
+    private void showPatientInfo(int selectedRow) {
+        
+        DefaultTableModel model = (DefaultTableModel) personsJTable.getModel();
+        Person person = (Person) model.getValueAt(selectedRow, 0);
+        navigateToPatientHistory(person);
+    }
+        
+    private void navigateToPersonView(Person person) {
+        
+        ViewPersonJPanel viewPersonJPanel = new ViewPersonJPanel(displayJPanel,system,person);
+        displayJPanel.add("ViewPersonPanel",viewPersonJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }
+    private void navigateToPatientHistory(Person person) {
+        
+        EncounterHistoryJPanel encounterHistoryJPanel = new EncounterHistoryJPanel(displayJPanel,system,person);
+        displayJPanel.add("PatientHistory",encounterHistoryJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addjButton;
+    private javax.swing.JButton backJButton;
+    private javax.swing.JButton btnNext;
+    private javax.swing.JButton deletejButton;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel personsJLabel;
+    private javax.swing.JTable personsJTable;
+    private javax.swing.JButton viewjButton;
     // End of variables declaration//GEN-END:variables
 }

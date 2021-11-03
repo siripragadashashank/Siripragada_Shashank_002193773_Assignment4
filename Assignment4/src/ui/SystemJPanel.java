@@ -4,6 +4,17 @@
  */
 package ui;
 
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.System;
+import model.Community;
+import model.City;
+import model.Encounter;
+import model.SampleData;
 /**
  *
  * @author sirip
@@ -13,10 +24,33 @@ public class SystemJPanel extends javax.swing.JPanel {
     /**
      * Creates new form SystemJPanel
      */
-    public SystemJPanel() {
+    private System system;
+    private City city;
+    private JPanel displayJPanel;
+    
+    public SystemJPanel(JPanel displayJPanel, System system) {
+        this.displayJPanel = displayJPanel;
+        this.system = system;    
         initComponents();
+        initializeData();
+        populateTable();
     }
+    private void initializeData() {
+        system = SampleData.initData();
+    }
+    public void populateTable() {
+        
+        DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
+        model.setRowCount(0);
+        for(City city:system.getCities()) {
+            Object[] row = new Object[1];
+            row[0]=city;
 
+            model.addRow(row);
+        }
+
+           
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,19 +60,118 @@ public class SystemJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblSystemHeading = new javax.swing.JLabel();
+        btnSystemNext = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCity = new javax.swing.JTable();
+        backJButton = new javax.swing.JButton();
+
+        lblSystemHeading.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblSystemHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSystemHeading.setText("City Tracking System");
+
+        btnSystemNext.setText("View Communities");
+        btnSystemNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSystemNextActionPerformed(evt);
+            }
+        });
+
+        tblCity.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Cities"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblCity);
+
+        backJButton.setText("<< Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(307, 307, 307)
+                        .addComponent(lblSystemHeading))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(126, 126, 126)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(338, 338, 338)
+                        .addComponent(btnSystemNext)))
+                .addGap(347, 347, 347))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(lblSystemHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backJButton)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSystemNext)
+                .addContainerGap(309, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSystemNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSystemNextActionPerformed
+        // TODO add your handling code here:
+
+        
+        int selectedRow = tblCity.getSelectedRow();
+        if(selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please Select a City to View the Communities");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
+        City city = (City) model.getValueAt(selectedRow, 0);
+        //ViewCommunityJPanel viewCommunityJPanel = new ViewCommunityJPanel(displayJPanel, system, community);
+        CommunityJPanel communityJPanel = new CommunityJPanel(displayJPanel, system, city);
+        displayJPanel.add("CommunityPanel", communityJPanel);
+        CardLayout layout = (CardLayout) displayJPanel.getLayout();
+        layout.next(displayJPanel);
+        
+        
+    }//GEN-LAST:event_btnSystemNextActionPerformed
+
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        // TODO add your handling code here:
+        displayJPanel.remove(this);
+        CardLayout cardLayout =  (CardLayout) displayJPanel.getLayout();
+        cardLayout.previous(displayJPanel);
+    }//GEN-LAST:event_backJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backJButton;
+    private javax.swing.JButton btnSystemNext;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblSystemHeading;
+    private javax.swing.JTable tblCity;
     // End of variables declaration//GEN-END:variables
 }

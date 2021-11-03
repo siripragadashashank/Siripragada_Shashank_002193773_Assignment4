@@ -19,57 +19,69 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="189" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                       <Component id="lblAddVitalSigns" min="-2" pref="268" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblSPO2" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblBmi" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                  <Component id="lblPulse" min="-2" pref="133" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="lblTemperature" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtSPO2" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
-                              <Component id="txtBmi" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblPulse" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
-                                      <Component id="lblBloodPressure" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblRespirationRate" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
-                                  <Component id="lblTemperature" min="-2" pref="140" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtRespirationRate" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
                               <Component id="txtPulse" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
                               <Component id="txtTemperature" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
-                              <Component id="txtBloodPressure" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblDbp" min="-2" pref="133" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                                  <Component id="txtDbp" min="-2" pref="135" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblSbp" min="-2" pref="133" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                                  <Component id="txtSbp" min="-2" pref="135" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="lblRespirationRate" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                                  <Component id="txtRespirationRate" min="-2" pref="135" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblSPO2" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="lblBmi" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="txtSPO2" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                                      <Component id="txtBmi" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnUpdateVitalSigns" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnUpdateVitalSigns" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="151" max="32767" attributes="0"/>
@@ -80,8 +92,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-              <Component id="lblAddVitalSigns" min="-2" pref="29" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblAddVitalSigns" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                  <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtTemperature" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblTemperature" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
@@ -93,10 +108,15 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblBloodPressure" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                  <Component id="txtBloodPressure" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblSbp" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                  <Component id="txtSbp" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblDbp" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                  <Component id="txtDbp" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblRespirationRate" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                   <Component id="txtRespirationRate" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -113,9 +133,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnUpdateVitalSigns" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="58" max="32767" attributes="0"/>
+              <EmptySpace pref="119" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -149,7 +167,7 @@
           <Font name="Lucida Grande" size="20" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Update Vital Signs"/>
+        <Property name="text" type="java.lang.String" value="View/Update Vital Signs"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSPO2">
@@ -193,17 +211,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtPulse">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtBloodPressure">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblBloodPressure">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Lucida Grande" size="14" style="1"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Blood Pressure:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnUpdateVitalSigns">
       <Properties>
         <Property name="text" type="java.lang.String" value="Update"/>
@@ -211,6 +218,28 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateVitalSignsActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDbp">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="14" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Diastolic BP:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDbp">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSbp">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="14" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Systolic BP:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtSbp">
     </Component>
   </SubComponents>
 </Form>

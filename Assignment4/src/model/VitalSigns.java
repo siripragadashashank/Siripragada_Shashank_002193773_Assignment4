@@ -11,20 +11,26 @@ package model;
 public class VitalSigns {
     private double temperature;
     private int pulse;
-    private double bloodPressure;
+    private double sbp;
+    private double dbp;
     private int respirationRate;
     private double spo2;
     private double bmi;
 
-    public VitalSigns(double temperature, int pulse, double bloodPressure, int respirationRate, double spo2, double bmi) {
+    public VitalSigns(double temperature, int pulse, double sbp, double dbp, int respirationRate, double spo2, double bmi) {
         this.temperature = temperature;
         this.pulse = pulse;
-        this.bloodPressure = bloodPressure;
+        this.sbp = sbp;
+        this.dbp = dbp;
         this.respirationRate = respirationRate;
         this.spo2 = spo2;
         this.bmi = bmi;
     }
-
+    
+    public VitalSigns() {
+        
+    }
+    
     public double getTemperature() {
         return temperature;
     }
@@ -41,12 +47,20 @@ public class VitalSigns {
         this.pulse = pulse;
     }
 
-    public double getBloodPressure() {
-        return bloodPressure;
+    public double getSbp() {
+        return sbp;
     }
 
-    public void setBloodPressure(double bloodPressure) {
-        this.bloodPressure = bloodPressure;
+    public void setSbp(double sbp) {
+        this.sbp = sbp;
+    }
+
+    public double getDbp() {
+        return dbp;
+    }
+
+    public void setDbp(double dbp) {
+        this.dbp = dbp;
     }
 
     public int getRespirationRate() {

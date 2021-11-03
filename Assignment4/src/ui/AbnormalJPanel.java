@@ -3,7 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ui;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import javax.swing.table.DefaultTableModel;
+//import model.BloodPressureStatusHelper;
+import model.City;
+import model.Community;
+import model.House;
+import model.Person;
+import model.System;
 /**
  *
  * @author sirip
@@ -13,7 +26,10 @@ public class AbnormalJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AbnormalJPanel
      */
-    public AbnormalJPanel() {
+    private System system;
+    
+    public AbnormalJPanel(System system) {
+        this.system = system;
         initComponents();
     }
 
@@ -26,19 +42,129 @@ public class AbnormalJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cityjLabel = new javax.swing.JLabel();
+        cityjComboBox = new javax.swing.JComboBox<>();
+        communityjLabel = new javax.swing.JLabel();
+        communityjComboBox = new javax.swing.JComboBox<>();
+        searchjButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        personsjTable = new javax.swing.JTable();
+        headerjLabel = new javax.swing.JLabel();
+
+        cityjLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        cityjLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        cityjLabel.setText("City :");
+
+        communityjLabel.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        communityjLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        communityjLabel.setText("Community :");
+
+        searchjButton.setText("Search");
+        searchjButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchjButtonActionPerformed(evt);
+            }
+        });
+
+        personsjTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Person Name", "Age"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(personsjTable);
+
+        headerjLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        headerjLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        headerjLabel.setText("Persons with Abnormal Vitals ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(cityjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(communityjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(communityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(searchjButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(headerjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(headerjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cityjLabel)
+                    .addComponent(cityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(communityjLabel)
+                    .addComponent(communityjComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchjButton))
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void searchjButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchjButtonActionPerformed
+        // TODO add your handling code here:
+        String cityName = (String) cityjComboBox.getSelectedItem();
+        String communityName = (String) communityjComboBox.getSelectedItem();
+
+//        for(City city:system.getCities()){
+//            if(city.getCityName().name().equalsIgnoreCase(cityName)){
+//
+//                for(Community community:city.getCommunities()){
+//                    if(community.getCommunityName().equalsIgnoreCase(communityName)){
+//
+//                        if(isOnlyLatest){
+//                            displayPatients(community, true);
+//                        }else{
+//                            displayPatients(community, false);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+    }//GEN-LAST:event_searchjButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cityjComboBox;
+    private javax.swing.JLabel cityjLabel;
+    private javax.swing.JComboBox<String> communityjComboBox;
+    private javax.swing.JLabel communityjLabel;
+    private javax.swing.JLabel headerjLabel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable personsjTable;
+    private javax.swing.JButton searchjButton;
     // End of variables declaration//GEN-END:variables
 }

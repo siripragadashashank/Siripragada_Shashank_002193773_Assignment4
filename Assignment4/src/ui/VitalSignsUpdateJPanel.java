@@ -24,16 +24,27 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
      * Creates new form VitalSignsUpdateJPanel
      */
     private JPanel displayJPanel;
-    private model.System system;
-    private Person person;
+    private System system;
+    private VitalSigns vitalSigns;
     
-    public VitalSignsUpdateJPanel(JPanel displayJPanel, System system, Person person) {
+    public VitalSignsUpdateJPanel(JPanel displayJPanel, System system, VitalSigns vitalSigns) {
         this.displayJPanel=displayJPanel;
         this.system=system;
-        this.person=person;
+        this.vitalSigns=vitalSigns;
         initComponents();
+        displayData(vitalSigns);
     }
-
+    private void displayData(VitalSigns vitalSigns){
+        
+        txtTemperature.setText(String.valueOf(vitalSigns.getTemperature()));
+        txtPulse.setText(String.valueOf(vitalSigns.getPulse()));
+        txtSbp.setText(String.valueOf(vitalSigns.getSbp()));
+        txtDbp.setText(String.valueOf(vitalSigns.getDbp()));
+        txtRespirationRate.setText(String.valueOf(vitalSigns.getRespirationRate()));
+        txtSPO2.setText(String.valueOf(vitalSigns.getSpo2()));
+        txtBmi.setText(String.valueOf(vitalSigns.getBmi()));
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,9 +66,11 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
         lblBmi = new javax.swing.JLabel();
         lblTemperature = new javax.swing.JLabel();
         txtPulse = new javax.swing.JTextField();
-        txtBloodPressure = new javax.swing.JTextField();
-        lblBloodPressure = new javax.swing.JLabel();
         btnUpdateVitalSigns = new javax.swing.JButton();
+        lblDbp = new javax.swing.JLabel();
+        txtDbp = new javax.swing.JTextField();
+        lblSbp = new javax.swing.JLabel();
+        txtSbp = new javax.swing.JTextField();
 
         lblRespirationRate.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         lblRespirationRate.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -69,7 +82,7 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
 
         lblAddVitalSigns.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
         lblAddVitalSigns.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAddVitalSigns.setText("Update Vital Signs");
+        lblAddVitalSigns.setText("View/Update Vital Signs");
 
         lblSPO2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         lblSPO2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -90,16 +103,20 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
         lblTemperature.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTemperature.setText("Temperature:");
 
-        lblBloodPressure.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        lblBloodPressure.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblBloodPressure.setText("Blood Pressure:");
-
         btnUpdateVitalSigns.setText("Update");
         btnUpdateVitalSigns.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateVitalSignsActionPerformed(evt);
             }
         });
+
+        lblDbp.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        lblDbp.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblDbp.setText("Diastolic BP:");
+
+        lblSbp.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        lblSbp.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblSbp.setText("Systolic BP:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -108,51 +125,62 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnBack)
+                        .addGap(88, 88, 88)
                         .addComponent(lblAddVitalSigns, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblSPO2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(lblBmi)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(7, 7, 7)
+                                    .addComponent(lblPulse, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lblTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(82, 82, 82)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtSPO2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtBmi, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(126, 126, 126)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblPulse, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(lblRespirationRate))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(119, 119, 119)
-                                    .addComponent(lblTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(82, 82, 82)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtRespirationRate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtPulse, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txtTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(126, 126, 126)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblDbp, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(82, 82, 82)
+                                    .addComponent(txtDbp, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblSbp, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(82, 82, 82)
+                                    .addComponent(txtSbp, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(126, 126, 126)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblRespirationRate)
+                                    .addGap(82, 82, 82)
+                                    .addComponent(txtRespirationRate, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblSPO2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(lblBmi)))
+                                    .addGap(82, 82, 82)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtSPO2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtBmi, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(270, 270, 270)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBack)
-                            .addComponent(btnUpdateVitalSigns))))
+                        .addComponent(btnUpdateVitalSigns)))
                 .addContainerGap(151, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(lblAddVitalSigns, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAddVitalSigns, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -162,9 +190,13 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
                     .addComponent(txtPulse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBloodPressure, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(lblSbp, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSbp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDbp, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDbp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRespirationRate, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRespirationRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -178,9 +210,7 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
                     .addComponent(txtBmi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdateVitalSigns)
-                .addGap(39, 39, 39)
-                .addComponent(btnBack)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -198,27 +228,86 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
     private void btnUpdateVitalSignsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateVitalSignsActionPerformed
         // TODO add your handling code here:
 
-        VitalSigns vitalSigns = new VitalSigns(Double.valueOf(txtTemperature.getText()),
-            Integer.valueOf(txtPulse.getText()),
-            Double.valueOf(txtBloodPressure.getText()),
-            Integer.valueOf(txtRespirationRate.getText()),
-            Double.valueOf(txtSPO2.getText()),
-            Double.valueOf(txtBmi.getText()));
+        boolean success = false;
+        try {
+            double temperature = Double.parseDouble(txtTemperature.getText());
+            vitalSigns.setTemperature(temperature);
+            success = true;            
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "Temperature must be Float."); 
+        }
+        
+        try {
+            int pulse = Integer.parseInt(txtPulse.getText());
+            vitalSigns.setPulse(pulse);
+            success = true;
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "Pulse must be an Integer."); 
+        }
+        
+        try {
+            double sbp = Double.parseDouble(txtSbp.getText());
+            vitalSigns.setSbp(sbp);
+            success = true;
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "Systolic BP must be Float."); 
+        }
+        
+        try {
+            double dbp = Double.parseDouble(txtDbp.getText());
+            vitalSigns.setDbp(dbp);
+            success = true;
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "Diastolic BP must be Float."); 
+        }
+        
+        try {
+            int resprate = Integer.parseInt(txtRespirationRate.getText());
+            vitalSigns.setRespirationRate(resprate);
+            success = true;
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "Respiration Rate must be an Integer."); 
+        }
+        
+        try {
+            double spo2 = Double.parseDouble(txtSPO2.getText());
+            vitalSigns.setSpo2(spo2);
+            success = true;
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "SpO2 must be Float."); 
+        }
+                
+        try {
+            double bmi = Double.parseDouble(txtBmi.getText());
+            vitalSigns.setBmi(bmi);
+            success = true;
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "BMI must be Float."); 
+        }
+        if (success) {
+            vitalSigns.setTemperature(Double.parseDouble(txtTemperature.getText()));
+            vitalSigns.setPulse(Integer.parseInt(txtPulse.getText()));
+            vitalSigns.setSbp(Double.parseDouble(txtSbp.getText()));
+            vitalSigns.setDbp(Double.parseDouble(txtDbp.getText()));
+            vitalSigns.setRespirationRate(Integer.valueOf(txtRespirationRate.getText()));
+            vitalSigns.setSpo2(Double.parseDouble(txtSPO2.getText()));
+            vitalSigns.setBmi(Double.parseDouble(txtBmi.getText()));
 
-        Encounter encounter = new Encounter(vitalSigns);
+            JOptionPane.showMessageDialog(this, "Successfully updated the Vital Signs");
+            resetData();
+        }
+        
+        
+        
 
-        EncounterHistory encounterHistory = person.getPatient().getEncounterHistory();
-        encounterHistory.getEncounterHistory().add(encounter);
-
-        JOptionPane.showMessageDialog(this, "Successfully Added the Vital Signs");
-        resetData();
     }//GEN-LAST:event_btnUpdateVitalSignsActionPerformed
 
     private void resetData() {
         
         txtTemperature.setText("");
         txtPulse.setText("");
-        txtBloodPressure.setText("");
+        txtSbp.setText("");
+        txtDbp.setText("");
         txtRespirationRate.setText("");
         txtSPO2.setText("");
         txtBmi.setText("");
@@ -228,17 +317,19 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnUpdateVitalSigns;
     private javax.swing.JLabel lblAddVitalSigns;
-    private javax.swing.JLabel lblBloodPressure;
     private javax.swing.JLabel lblBmi;
+    private javax.swing.JLabel lblDbp;
     private javax.swing.JLabel lblPulse;
     private javax.swing.JLabel lblRespirationRate;
     private javax.swing.JLabel lblSPO2;
+    private javax.swing.JLabel lblSbp;
     private javax.swing.JLabel lblTemperature;
-    private javax.swing.JTextField txtBloodPressure;
     private javax.swing.JTextField txtBmi;
+    private javax.swing.JTextField txtDbp;
     private javax.swing.JTextField txtPulse;
     private javax.swing.JTextField txtRespirationRate;
     private javax.swing.JTextField txtSPO2;
+    private javax.swing.JTextField txtSbp;
     private javax.swing.JTextField txtTemperature;
     // End of variables declaration//GEN-END:variables
 }
