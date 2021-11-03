@@ -13,7 +13,10 @@ import javax.swing.table.DefaultTableModel;
 import model.System;
 import model.Community;
 import model.City;
+import model.Person;
 import model.Encounter;
+import model.House;
+import model.Patient;
 import model.SampleData;
 /**
  *
@@ -65,12 +68,15 @@ public class SystemJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCity = new javax.swing.JTable();
         backJButton = new javax.swing.JButton();
+        deleteJButton = new javax.swing.JButton();
+        viewJButton = new javax.swing.JButton();
+        addJButton = new javax.swing.JButton();
 
         lblSystemHeading.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblSystemHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSystemHeading.setText("City Tracking System");
 
-        btnSystemNext.setText("View Communities");
+        btnSystemNext.setText("Next");
         btnSystemNext.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSystemNextActionPerformed(evt);
@@ -105,6 +111,27 @@ public class SystemJPanel extends javax.swing.JPanel {
             }
         });
 
+        deleteJButton.setText("Delete");
+        deleteJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteJButtonActionPerformed(evt);
+            }
+        });
+
+        viewJButton.setText("View/Update");
+        viewJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewJButtonActionPerformed(evt);
+            }
+        });
+
+        addJButton.setText("Add");
+        addJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,9 +147,15 @@ public class SystemJPanel extends javax.swing.JPanel {
                         .addGap(126, 126, 126)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(338, 338, 338)
+                        .addGap(252, 252, 252)
+                        .addComponent(addJButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(viewJButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(deleteJButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSystemNext)))
-                .addGap(347, 347, 347))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +167,11 @@ public class SystemJPanel extends javax.swing.JPanel {
                     .addComponent(backJButton)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnSystemNext)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteJButton)
+                    .addComponent(viewJButton)
+                    .addComponent(addJButton)
+                    .addComponent(btnSystemNext))
                 .addContainerGap(309, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -166,12 +203,68 @@ public class SystemJPanel extends javax.swing.JPanel {
         cardLayout.previous(displayJPanel);
     }//GEN-LAST:event_backJButtonActionPerformed
 
+    private void deleteJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJButtonActionPerformed
+        // TODO add your handling code here:
+
+        int selectedRow = tblCity.getSelectedRow();
+        if(selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please Select any City to delete");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
+        Community community = (Community) model.getValueAt(selectedRow, 0);
+
+        ArrayList<Person> personsToRemove = new ArrayList<>();
+        ArrayList<House> houses = community.getCommunityHouses();
+        for(House house:houses) {
+            personsToRemove.addAll(house.getPersons());
+        }
+        ArrayList<Patient> patientsToRemove = new ArrayList<>();
+        for(Person person:personsToRemove) {
+            patientsToRemove.add(person.getPatient());
+        }
+
+        system.getPersonDirectory().getPersonList().removeAll(personsToRemove);
+        system.getPatientDirectory().getPatientList().removeAll(patientsToRemove);
+
+        city.getCommunities().remove(community);
+
+        JOptionPane.showMessageDialog(this, "Successfully deleted the City");
+        populateTable();
+    }//GEN-LAST:event_deleteJButtonActionPerformed
+
+    private void viewJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewJButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblCity.getSelectedRow();
+        if(selectedRow <0){
+            JOptionPane.showMessageDialog(this, "Please Select any City to View the Communities");
+            return;
+        }
+        DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
+        City city = (City) model.getValueAt(selectedRow, 0);
+        ViewCityJPanel viewCityJPanel = new ViewCityJPanel(displayJPanel, system, city);
+        displayJPanel.add("ViewCityPanel", viewCityJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_viewJButtonActionPerformed
+
+    private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
+        // TODO add your handling code here:
+        AddCityJPanel addCityJPanel = new AddCityJPanel(displayJPanel);
+        displayJPanel.add("AddCityScreen", addCityJPanel);
+        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+        cardLayout.next(displayJPanel);
+    }//GEN-LAST:event_addJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addJButton;
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnSystemNext;
+    private javax.swing.JButton deleteJButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblSystemHeading;
     private javax.swing.JTable tblCity;
+    private javax.swing.JButton viewJButton;
     // End of variables declaration//GEN-END:variables
 }

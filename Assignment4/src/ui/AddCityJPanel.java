@@ -4,32 +4,28 @@
  */
 package ui;
 
-import javax.swing.JPanel;
-import model.City;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.City;
 import model.Community;
+import model.City;
 import model.House;
-
+import model.CityList;
 /**
  *
  * @author sirip
  */
-public class AddCommunityJPanel extends javax.swing.JPanel {
+public class AddCityJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form AddCommunityJPanel
+     * Creates new form AddCityJPanel
      */
     private JPanel displayJPanel;
     private City city;
     
-    public AddCommunityJPanel(JPanel displayJPanel) {
+    public AddCityJPanel(JPanel displayJPanel) {
         this.displayJPanel=displayJPanel;
         initComponents();
     }
@@ -44,21 +40,21 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         lblAddCommunity = new javax.swing.JLabel();
-        lblCommunityName = new javax.swing.JLabel();
-        txtAddCommunity = new javax.swing.JTextField();
-        bntAddCommunity = new javax.swing.JButton();
+        lblCityName = new javax.swing.JLabel();
+        txtAddCity = new javax.swing.JTextField();
+        btnAddCity = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
         lblAddCommunity.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         lblAddCommunity.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAddCommunity.setText("Add Community");
+        lblAddCommunity.setText("Add City");
 
-        lblCommunityName.setText("Community Name :");
+        lblCityName.setText("City Name :");
 
-        bntAddCommunity.setText("Add");
-        bntAddCommunity.addActionListener(new java.awt.event.ActionListener() {
+        btnAddCity.setText("Add");
+        btnAddCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntAddCommunityActionPerformed(evt);
+                btnAddCityActionPerformed(evt);
             }
         });
 
@@ -82,13 +78,13 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
                         .addComponent(lblAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(269, 269, 269)
-                        .addComponent(bntAddCommunity))
+                        .addComponent(btnAddCity))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(156, 156, 156)
-                        .addComponent(lblCommunityName)
+                        .addComponent(lblCityName)
                         .addGap(18, 18, 18)
-                        .addComponent(txtAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(214, Short.MAX_VALUE))
+                        .addComponent(txtAddCity, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,24 +95,28 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
                     .addComponent(btnBack))
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCommunityName)
-                    .addComponent(txtAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCityName)
+                    .addComponent(txtAddCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addComponent(bntAddCommunity)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addComponent(btnAddCity)
+                .addContainerGap(202, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bntAddCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddCommunityActionPerformed
+    private void btnAddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCityActionPerformed
         // TODO add your handling code here:
 
-        String communityName = txtAddCommunity.getText();
-        ArrayList<House> house = new ArrayList<>();
-        Community community = new Community(communityName, house);
-        city.getCommunities().add(community);
+        String cityName = txtAddCity.getText();
+        ArrayList<Community> communities = new ArrayList<>();
+        City city = new City(cityName, communities);
+        CityList cityList = new CityList();
+        
+        cityList.getCities().add(city);
         JOptionPane.showMessageDialog(this, "Successfully Saved");
-        txtAddCommunity.setText("");
-    }//GEN-LAST:event_bntAddCommunityActionPerformed
+        txtAddCity.setText("");
+        
+
+    }//GEN-LAST:event_btnAddCityActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -131,10 +131,10 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntAddCommunity;
+    private javax.swing.JButton btnAddCity;
     private javax.swing.JButton btnBack;
     private javax.swing.JLabel lblAddCommunity;
-    private javax.swing.JLabel lblCommunityName;
-    private javax.swing.JTextField txtAddCommunity;
+    private javax.swing.JLabel lblCityName;
+    private javax.swing.JTextField txtAddCity;
     // End of variables declaration//GEN-END:variables
 }

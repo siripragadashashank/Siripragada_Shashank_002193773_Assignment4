@@ -4,36 +4,37 @@
  */
 package ui;
 
-import javax.swing.JPanel;
-import model.City;
 import java.awt.CardLayout;
 import java.awt.Component;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.City;
 import model.Community;
-import model.House;
-
+import model.System;
+import model.City;
 /**
  *
  * @author sirip
  */
-public class AddCommunityJPanel extends javax.swing.JPanel {
+public class ViewCityJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form AddCommunityJPanel
+     * Creates new form ViewCityJPanel
      */
     private JPanel displayJPanel;
+    private System system;
     private City city;
     
-    public AddCommunityJPanel(JPanel displayJPanel) {
-        this.displayJPanel=displayJPanel;
+    public ViewCityJPanel(JPanel displayJPanel, System system, City city) {
+        this.displayJPanel = displayJPanel;
+        this.system = system;
+        this.city = city;
         initComponents();
+        displayData();
     }
-
+    private void displayData() {    
+        txtViewCity.setText(city.getCityName());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,22 +44,22 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblAddCommunity = new javax.swing.JLabel();
-        lblCommunityName = new javax.swing.JLabel();
-        txtAddCommunity = new javax.swing.JTextField();
-        bntAddCommunity = new javax.swing.JButton();
+        viewCommunityJLabel = new javax.swing.JLabel();
+        communityNameJLabel = new javax.swing.JLabel();
+        txtViewCity = new javax.swing.JTextField();
+        btnUpdateCity = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
-        lblAddCommunity.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        lblAddCommunity.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAddCommunity.setText("Add Community");
+        viewCommunityJLabel.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        viewCommunityJLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        viewCommunityJLabel.setText("View/Update City");
 
-        lblCommunityName.setText("Community Name :");
+        communityNameJLabel.setText("Community Name :");
 
-        bntAddCommunity.setText("Add");
-        bntAddCommunity.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateCity.setText("Update");
+        btnUpdateCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bntAddCommunityActionPerformed(evt);
+                btnUpdateCityActionPerformed(evt);
             }
         });
 
@@ -79,44 +80,41 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
                         .addGap(32, 32, 32)
                         .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
-                        .addComponent(lblAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(viewCommunityJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(communityNameJLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtViewCity, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(269, 269, 269)
-                        .addComponent(bntAddCommunity))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(lblCommunityName)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(214, Short.MAX_VALUE))
+                        .addComponent(btnUpdateCity)))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewCommunityJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBack))
-                .addGap(62, 62, 62)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCommunityName)
-                    .addComponent(txtAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addComponent(bntAddCommunity)
-                .addContainerGap(190, Short.MAX_VALUE))
+                    .addComponent(communityNameJLabel)
+                    .addComponent(txtViewCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addComponent(btnUpdateCity)
+                .addContainerGap(200, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bntAddCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddCommunityActionPerformed
+    private void btnUpdateCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCityActionPerformed
         // TODO add your handling code here:
 
-        String communityName = txtAddCommunity.getText();
-        ArrayList<House> house = new ArrayList<>();
-        Community community = new Community(communityName, house);
-        city.getCommunities().add(community);
+        city.setCityName(txtViewCity.getText());
         JOptionPane.showMessageDialog(this, "Successfully Saved");
-        txtAddCommunity.setText("");
-    }//GEN-LAST:event_bntAddCommunityActionPerformed
+        txtViewCity.setText("");
+    }//GEN-LAST:event_btnUpdateCityActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
@@ -131,10 +129,10 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntAddCommunity;
     private javax.swing.JButton btnBack;
-    private javax.swing.JLabel lblAddCommunity;
-    private javax.swing.JLabel lblCommunityName;
-    private javax.swing.JTextField txtAddCommunity;
+    private javax.swing.JButton btnUpdateCity;
+    private javax.swing.JLabel communityNameJLabel;
+    private javax.swing.JTextField txtViewCity;
+    private javax.swing.JLabel viewCommunityJLabel;
     // End of variables declaration//GEN-END:variables
 }
