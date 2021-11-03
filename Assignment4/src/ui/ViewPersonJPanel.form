@@ -31,7 +31,7 @@
                               <Component id="agejLabel" alignment="0" max="32767" attributes="0"/>
                               <Component id="namejLabel" alignment="0" pref="135" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="namejTextField" alignment="0" max="32767" attributes="0"/>
                               <Component id="agejTextField" alignment="0" pref="144" max="32767" attributes="0"/>
@@ -43,7 +43,7 @@
                       <Component id="updatejButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="95" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="274" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,7 +67,7 @@
               </Group>
               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
               <Component id="updatejButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="116" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

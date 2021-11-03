@@ -68,8 +68,8 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(controlJPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(controlJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTrackAbnormal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnViewUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnViewUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
+                    .addComponent(btnTrackAbnormal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         controlJPanelLayout.setVerticalGroup(
@@ -77,14 +77,14 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(controlJPanelLayout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addComponent(btnViewUpdate)
-                .addGap(39, 39, 39)
+                .addGap(64, 64, 64)
                 .addComponent(btnTrackAbnormal)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addContainerGap(253, Short.MAX_VALUE))
         );
 
         jSplitPane.setLeftComponent(controlJPanel);
 
-        displayJPanel.setMinimumSize(new java.awt.Dimension(687, 449));
+        displayJPanel.setMinimumSize(new java.awt.Dimension(950, 449));
         displayJPanel.setLayout(new java.awt.CardLayout());
         jSplitPane.setRightComponent(displayJPanel);
 
@@ -92,7 +92,7 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane)
+            .addComponent(jSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1086, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +112,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnTrackAbnormalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrackAbnormalActionPerformed
         // TODO add your handling code here:
-        AbnormalJPanel trackJPanel = new AbnormalJPanel(system);
+        AbnormalJPanel trackJPanel = new AbnormalJPanel(displayJPanel, system);
         //jSplitPane.setRightComponent(trackJPanel);
         displayJPanel.add("TrackPanel", trackJPanel);
         CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();

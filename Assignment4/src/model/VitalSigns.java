@@ -4,6 +4,9 @@
  */
 package model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author sirip
@@ -16,6 +19,8 @@ public class VitalSigns {
     private int respirationRate;
     private double spo2;
     private double bmi;
+    private String createdOn;
+    private String updatedOn;
 
     public VitalSigns(double temperature, int pulse, double sbp, double dbp, int respirationRate, double spo2, double bmi) {
         this.temperature = temperature;
@@ -25,10 +30,19 @@ public class VitalSigns {
         this.respirationRate = respirationRate;
         this.spo2 = spo2;
         this.bmi = bmi;
+        this.createdOn = formatDate(new Date());
+        this.updatedOn = formatDate(new Date());
     }
     
     public VitalSigns() {
         
+    }
+    
+    private String formatDate(Date date){
+
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
     }
     
     public double getTemperature() {
@@ -86,6 +100,22 @@ public class VitalSigns {
     public void setBmi(double bmi) {
         this.bmi = bmi;
     }
+    
+    public String getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(String updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+    
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(String createdOn) {
+        this.createdOn = createdOn;
+    } 
     
     @Override
     public String toString() {

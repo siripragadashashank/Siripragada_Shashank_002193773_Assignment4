@@ -89,9 +89,9 @@ public class ViewHouseJPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(houseNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(269, 269, 269)
+                        .addGap(323, 323, 323)
                         .addComponent(updateJButton)))
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addGap(314, 314, 314))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,9 +104,9 @@ public class ViewHouseJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(houseNameJLabel)
                     .addComponent(houseNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addComponent(updateJButton)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addGap(173, 173, 173))
         );
     }// </editor-fold>//GEN-END:initComponents
 

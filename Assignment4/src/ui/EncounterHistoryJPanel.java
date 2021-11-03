@@ -46,7 +46,7 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
         
         for(Encounter encounter:encounters) {
             
-            Object[] row = new Object[7];
+            Object[] row = new Object[9];
             row[0] = encounter.getVitalSigns();
             row[1] = encounter.getVitalSigns().getPulse();
             row[2] = encounter.getVitalSigns().getSbp();
@@ -54,6 +54,8 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
             row[4] = encounter.getVitalSigns().getRespirationRate();
             row[5] = encounter.getVitalSigns().getSpo2();
             row[6] = encounter.getVitalSigns().getBmi();
+            row[7] = encounter.getVitalSigns().getCreatedOn();
+            row[8] = encounter.getVitalSigns().getUpdatedOn();
             
             model.addRow(row);
         }
@@ -77,17 +79,17 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
 
         tblEncounterHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Temperature", "Pulse", "Systolic BP", "Diastolic BP", "Respiration Rate", "SpO2", "BMI"
+                "Temperature", "Pulse", "Systolic BP", "Diastolic BP", "Respiration Rate", "SpO2", "BMI", "Created On", "Updated On"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -132,10 +134,6 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -144,13 +142,16 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
                         .addGap(92, 92, 92)
                         .addComponent(lblHeadingEncounterHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(313, 313, 313)
                         .addComponent(btnAdd)
                         .addGap(18, 18, 18)
                         .addComponent(btnViewUpdate)
                         .addGap(27, 27, 27)
                         .addComponent(btnDelete)))
-                .addContainerGap())
+                .addGap(63, 63, 63))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,14 +160,14 @@ public class EncounterHistoryJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHeadingEncounterHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backJButton))
-                .addGap(26, 26, 26)
+                .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnViewUpdate)
                     .addComponent(btnDelete))
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

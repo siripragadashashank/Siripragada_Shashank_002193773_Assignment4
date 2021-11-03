@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.City;
+import model.CityList;
 import model.Community;
 import model.House;
 
@@ -29,11 +30,12 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
     private JPanel displayJPanel;
     private City city;
     
-    public AddCommunityJPanel(JPanel displayJPanel) {
+    public AddCommunityJPanel(JPanel displayJPanel, City city) {
         this.displayJPanel=displayJPanel;
+        this.city = city;
         initComponents();
     }
-
+    String regxCommunityName = "^[a-zA-Z\\s]+$";
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,14 +83,14 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
                         .addGap(69, 69, 69)
                         .addComponent(lblAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(269, 269, 269)
-                        .addComponent(bntAddCommunity))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(156, 156, 156)
                         .addComponent(lblCommunityName)
                         .addGap(18, 18, 18)
-                        .addComponent(txtAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(214, Short.MAX_VALUE))
+                        .addComponent(txtAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(313, 313, 313)
+                        .addComponent(bntAddCommunity)))
+                .addGap(329, 329, 329))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,21 +103,37 @@ public class AddCommunityJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCommunityName)
                     .addComponent(txtAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addGap(27, 27, 27)
                 .addComponent(bntAddCommunity)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addGap(168, 168, 168))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntAddCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntAddCommunityActionPerformed
         // TODO add your handling code here:
 
-        String communityName = txtAddCommunity.getText();
-        ArrayList<House> house = new ArrayList<>();
-        Community community = new Community(communityName, house);
-        city.getCommunities().add(community);
-        JOptionPane.showMessageDialog(this, "Successfully Saved");
-        txtAddCommunity.setText("");
+        
+        if (txtAddCommunity.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Please enter a Community name");
+            return;
+        }
+        
+        if (txtAddCommunity.getText().matches(regxCommunityName)){
+ 
+       
+            String communityName = txtAddCommunity.getText();
+            ArrayList<House> houses = new ArrayList<>();
+            Community community = new Community(communityName, houses);
+            city.getCommunities().add(community);
+            JOptionPane.showMessageDialog(this, "Successfully Saved");
+            txtAddCommunity.setText("");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Enter a valid Community Name\nOnly alphabets and spaces allowed");
+        }
+        
+        
+
     }//GEN-LAST:event_bntAddCommunityActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

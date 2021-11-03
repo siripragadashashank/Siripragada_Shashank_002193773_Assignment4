@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import model.Community;
 import model.System;
 import model.City;
+import model.CityList;
 /**
  *
  * @author sirip
@@ -31,6 +32,8 @@ public class ViewCityJPanel extends javax.swing.JPanel {
         initComponents();
         displayData();
     }
+    
+    String regxCity = "^[a-zA-Z\\s]+$";
     private void displayData() {    
         txtViewCity.setText(city.getCityName());
     }
@@ -87,9 +90,9 @@ public class ViewCityJPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtViewCity, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(269, 269, 269)
+                        .addGap(346, 346, 346)
                         .addComponent(btnUpdateCity)))
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addGap(327, 327, 327))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,18 +105,48 @@ public class ViewCityJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(communityNameJLabel)
                     .addComponent(txtViewCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(33, 33, 33)
                 .addComponent(btnUpdateCity)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addGap(180, 180, 180))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCityActionPerformed
         // TODO add your handling code here:
 
-        city.setCityName(txtViewCity.getText());
-        JOptionPane.showMessageDialog(this, "Successfully Saved");
-        txtViewCity.setText("");
+
+        
+        
+        if (txtViewCity.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Please enter a city name");
+            return;
+        }
+        
+        for (City city : CityList.getCitiesList()){
+            if (city.getCityName().equals(txtViewCity.getText())){
+                JOptionPane.showMessageDialog(this, "City already present");
+                return;
+            }
+        }
+        
+        if (txtViewCity.getText().matches(regxCity)){
+            
+            
+            city.setCityName(txtViewCity.getText());
+            JOptionPane.showMessageDialog(this, "Successfully Saved");
+            txtViewCity.setText("");
+
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Enter a valid City Name\nOnly alphabets and spaces allowed");
+        }
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_btnUpdateCityActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

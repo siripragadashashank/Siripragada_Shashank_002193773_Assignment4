@@ -5,6 +5,7 @@
 package ui;
 
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,34 +33,32 @@ public class CommunityJPanel extends javax.swing.JPanel {
     private JPanel displayJPanel;
     private City city;
     
+    
     public CommunityJPanel(JPanel displayJPanel, System system, City city) {
         
         this.displayJPanel=displayJPanel;
         this.system=system;
         this.city = city;
         initComponents();
-        initializeData();
+        //initializeData();
         populateTable();
         
     }
-    private void initializeData() {
-        this.system = SampleData.initData();
-    }
+//    private void initializeData(System) {
+//        this.system = SampleData.initData();
+//    }
     public void populateTable() {
         
         DefaultTableModel model = (DefaultTableModel) communityJTable.getModel();
         model.setRowCount(0);
         
-        for(City city:system.getCities()) {
-            for(Community community:city.getCommunities()){
-                Object[] row = new Object[1];
-                row[0]=community;
-
-                model.addRow(row);
-            }
-        }
-
-           
+        java.lang.System.out.println(city.getCommunities().size());          
+        for(Community community:city.getCommunities()){
+            
+            Object[] row = new Object[1];
+            row[0]=community;
+            model.addRow(row);
+        }                 
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,45 +143,52 @@ public class CommunityJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(communitiesJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(192, 192, 192))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(goJButton)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(communitiesJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(123, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(219, 219, 219))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(addJButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(viewJButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(deleteJButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(goJButton)
-                                .addGap(200, 200, 200))))))
+                        .addGap(57, 57, 57)
+                        .addComponent(addJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(viewJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(deleteJButton)))
+                .addGap(157, 157, 157))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(communitiesJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backJButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(goJButton)
-                    .addComponent(deleteJButton)
-                    .addComponent(viewJButton)
-                    .addComponent(addJButton))
-                .addContainerGap(187, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(communitiesJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(backJButton)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(addJButton)
+                        .addGap(20, 20, 20)
+                        .addComponent(viewJButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteJButton)))
+                .addGap(18, 18, 18)
+                .addComponent(goJButton)
+                .addGap(134, 134, 134))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -191,6 +197,15 @@ public class CommunityJPanel extends javax.swing.JPanel {
         displayJPanel.remove(this);
         CardLayout cardLayout =  (CardLayout) displayJPanel.getLayout();
         cardLayout.previous(displayJPanel);
+        
+        
+//        displayJPanel.remove(this);
+//        Component[] componentArray = displayJPanel.getComponents();
+//        Component component = componentArray[componentArray.length-1];
+//        CommunityJPanel communityJPanel = (CommunityJPanel) component;
+//        communityJPanel.populateTable();
+//        CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
+//        cardLayout.previous(displayJPanel);
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private String formatDate(Date date){
@@ -273,7 +288,7 @@ public class CommunityJPanel extends javax.swing.JPanel {
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
         // TODO add your handling code here:
-        AddCommunityJPanel addCommunityJPanel = new AddCommunityJPanel(displayJPanel);
+        AddCommunityJPanel addCommunityJPanel = new AddCommunityJPanel(displayJPanel, city);
         displayJPanel.add("AddCommunityScreen", addCommunityJPanel);
         CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
         cardLayout.next(displayJPanel);

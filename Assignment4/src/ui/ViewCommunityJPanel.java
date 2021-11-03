@@ -8,6 +8,8 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.City;
+import model.CityList;
 import model.Community;
 import model.System;
 
@@ -34,6 +36,8 @@ public class ViewCommunityJPanel extends javax.swing.JPanel {
     private void displayData() {    
         txtViewCommunity.setText(community.getCommunityName());
     }
+    
+    String regxCommunityName = "^[a-zA-Z\\s]+$";
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,9 +90,9 @@ public class ViewCommunityJPanel extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtViewCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(269, 269, 269)
+                        .addGap(332, 332, 332)
                         .addComponent(btnUpdateCommunity)))
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addGap(323, 323, 323))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,18 +105,36 @@ public class ViewCommunityJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(communityNameJLabel)
                     .addComponent(txtViewCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addComponent(btnUpdateCommunity)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addGap(181, 181, 181))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateCommunityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCommunityActionPerformed
         // TODO add your handling code here:
 
-        community.setCommunityName(txtViewCommunity.getText());
-        JOptionPane.showMessageDialog(this, "Successfully Saved");
-        txtViewCommunity.setText("");
+//        community.setCommunityName(txtViewCommunity.getText());
+//        JOptionPane.showMessageDialog(this, "Successfully Saved");
+//        txtViewCommunity.setText("");
+        
+        if (txtViewCommunity.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Please enter a Community name");
+            return;
+        }
+        
+        if (txtViewCommunity.getText().matches(regxCommunityName)){
+            
+            
+            community.setCommunityName(txtViewCommunity.getText());
+            JOptionPane.showMessageDialog(this, "Successfully Saved");
+            txtViewCommunity.setText("");
+
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Enter a valid Community Name\nOnly alphabets and spaces allowed");
+        }
+        
     }//GEN-LAST:event_btnUpdateCommunityActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

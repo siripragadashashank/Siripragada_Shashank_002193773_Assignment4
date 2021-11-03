@@ -37,7 +37,9 @@ public class System {
     public void setPersonDirectory(PersonDirectory personDirectory) {
         this.personDirectory = personDirectory;
     }
-
+    public void addCity(City cityName){
+        this.cities.add(cityName);
+    }
     public ArrayList<City> getCities() {
         return cities;
     }

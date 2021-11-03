@@ -35,18 +35,19 @@ public class SystemJPanel extends javax.swing.JPanel {
         this.displayJPanel = displayJPanel;
         this.system = system;    
         initComponents();
-        initializeData();
+//        initializeData();
         populateTable();
     }
-    private void initializeData() {
-        system = SampleData.initData();
-    }
+//    private void initializeData() {
+//        system = SampleData.initData();
+//    }
     public void populateTable() {
         
         DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
         model.setRowCount(0);
         for(City city:system.getCities()) {
             Object[] row = new Object[1];
+            
             row[0]=city;
 
             model.addRow(row);
@@ -74,7 +75,7 @@ public class SystemJPanel extends javax.swing.JPanel {
 
         lblSystemHeading.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblSystemHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSystemHeading.setText("City Tracking System");
+        lblSystemHeading.setText("Tracking System");
 
         btnSystemNext.setText("Next");
         btnSystemNext.addActionListener(new java.awt.event.ActionListener() {
@@ -111,21 +112,21 @@ public class SystemJPanel extends javax.swing.JPanel {
             }
         });
 
-        deleteJButton.setText("Delete");
+        deleteJButton.setText("Delete City");
         deleteJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteJButtonActionPerformed(evt);
             }
         });
 
-        viewJButton.setText("View/Update");
+        viewJButton.setText("View/Update City");
         viewJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewJButtonActionPerformed(evt);
             }
         });
 
-        addJButton.setText("Add");
+        addJButton.setText("Add City");
         addJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addJButtonActionPerformed(evt);
@@ -139,40 +140,46 @@ public class SystemJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addComponent(lblSystemHeading))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addGap(83, 83, 83)
                         .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(126, 126, 126)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(112, 112, 112)
+                        .addComponent(lblSystemHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(addJButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(viewJButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteJButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSystemNext)))
-                .addContainerGap())
+                        .addGap(268, 268, 268)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSystemNext)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addComponent(addJButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(viewJButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(deleteJButton)))))
+                .addGap(223, 223, 223))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(lblSystemHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSystemHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(backJButton))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backJButton)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addJButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(viewJButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteJButton)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteJButton)
-                    .addComponent(viewJButton)
-                    .addComponent(addJButton)
-                    .addComponent(btnSystemNext))
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addComponent(btnSystemNext)
+                .addContainerGap(155, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -185,9 +192,9 @@ public class SystemJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please Select a City to View the Communities");
             return;
         }
+        
         DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
         City city = (City) model.getValueAt(selectedRow, 0);
-        //ViewCommunityJPanel viewCommunityJPanel = new ViewCommunityJPanel(displayJPanel, system, community);
         CommunityJPanel communityJPanel = new CommunityJPanel(displayJPanel, system, city);
         displayJPanel.add("CommunityPanel", communityJPanel);
         CardLayout layout = (CardLayout) displayJPanel.getLayout();
@@ -237,7 +244,7 @@ public class SystemJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = tblCity.getSelectedRow();
         if(selectedRow <0){
-            JOptionPane.showMessageDialog(this, "Please Select any City to View the Communities");
+            JOptionPane.showMessageDialog(this, "Please Select any City.");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) tblCity.getModel();
@@ -250,7 +257,7 @@ public class SystemJPanel extends javax.swing.JPanel {
 
     private void addJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJButtonActionPerformed
         // TODO add your handling code here:
-        AddCityJPanel addCityJPanel = new AddCityJPanel(displayJPanel);
+        AddCityJPanel addCityJPanel = new AddCityJPanel(displayJPanel, system);
         displayJPanel.add("AddCityScreen", addCityJPanel);
         CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
         cardLayout.next(displayJPanel);

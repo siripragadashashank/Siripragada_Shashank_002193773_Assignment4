@@ -11,8 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Community;
 import model.City;
-import model.House;
 import model.CityList;
+import model.House;
+import model.System;
 /**
  *
  * @author sirip
@@ -24,11 +25,15 @@ public class AddCityJPanel extends javax.swing.JPanel {
      */
     private JPanel displayJPanel;
     private City city;
+    private System system;
     
-    public AddCityJPanel(JPanel displayJPanel) {
+    public AddCityJPanel(JPanel displayJPanel, System system) {
         this.displayJPanel=displayJPanel;
+        this.system = system;
         initComponents();
     }
+    
+    String regxCity = "^[a-zA-Z\\s]+$";
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,14 +82,14 @@ public class AddCityJPanel extends javax.swing.JPanel {
                         .addGap(69, 69, 69)
                         .addComponent(lblAddCommunity, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(269, 269, 269)
-                        .addComponent(btnAddCity))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(156, 156, 156)
                         .addComponent(lblCityName)
                         .addGap(18, 18, 18)
-                        .addComponent(txtAddCity, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(217, Short.MAX_VALUE))
+                        .addComponent(txtAddCity, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(284, 284, 284)
+                        .addComponent(btnAddCity)))
+                .addGap(304, 304, 304))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,23 +102,42 @@ public class AddCityJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCityName)
                     .addComponent(txtAddCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
                 .addComponent(btnAddCity)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGap(211, 211, 211))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCityActionPerformed
         // TODO add your handling code here:
 
-        String cityName = txtAddCity.getText();
-        ArrayList<Community> communities = new ArrayList<>();
-        City city = new City(cityName, communities);
-        CityList cityList = new CityList();
+        if (txtAddCity.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Please enter a city name");
+            return;
+        }
+        for (City city : CityList.getCitiesList()){
+            if (city.getCityName().equals(txtAddCity.getText())){
+                JOptionPane.showMessageDialog(this, "City already present");
+                return;
+            }
+        }
         
-        cityList.getCities().add(city);
-        JOptionPane.showMessageDialog(this, "Successfully Saved");
-        txtAddCity.setText("");
+        if (txtAddCity.getText().matches(regxCity)){
+            CityList.addCity(new City(txtAddCity.getText()));
+            system.addCity(new City(txtAddCity.getText()));
+            JOptionPane.showMessageDialog(this, "City added successfully");
+            txtAddCity.setText("");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Enter a valid City Name\nOnly alphabets and spaces allowed");
+        }
+        
+//        String cityName = txtAddCity.getText();
+//        ArrayList<Community> communities = new ArrayList<>();
+//        City city = new City(cityName, communities);       
+//        system.getCities().add(city);
+//        JOptionPane.showMessageDialog(this, "Successfully Saved");
+//        txtAddCity.setText("");
         
 
     }//GEN-LAST:event_btnAddCityActionPerformed
@@ -123,8 +147,8 @@ public class AddCityJPanel extends javax.swing.JPanel {
         displayJPanel.remove(this);
         Component[] componentArray = displayJPanel.getComponents();
         Component component = componentArray[componentArray.length-1];
-        CommunityJPanel communityJPanel = (CommunityJPanel) component;
-        communityJPanel.populateTable();
+        SystemJPanel sysJPanel = (SystemJPanel) component;
+        sysJPanel.populateTable();
         CardLayout cardLayout = (CardLayout) displayJPanel.getLayout();
         cardLayout.previous(displayJPanel);
     }//GEN-LAST:event_btnBackActionPerformed

@@ -20,6 +20,10 @@ public class City {
         this.cityName = cityName;
         this.Communities = Communities;
     }
+    public City(String cityName) {
+        this.cityName=cityName;
+        this.Communities= new ArrayList<Community>();
+    }
 
     public String getCityName() {
         return cityName;
@@ -33,6 +37,13 @@ public class City {
         return Communities;
     }
 
+    public void addCommunity(Community community){
+        this.Communities.add(community);
+    }
+    
+    public void addCommunities(ArrayList<Community> communities){
+        this.Communities.addAll(communities);
+    }
     public void setCommunities(ArrayList<Community> Communities) {
         this.Communities = Communities;
     }

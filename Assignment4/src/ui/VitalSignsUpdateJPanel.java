@@ -6,6 +6,8 @@ package ui;
 
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Encounter;
@@ -140,20 +142,18 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtPulse, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(txtTemperature, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(126, 126, 126)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblDbp, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(82, 82, 82)
-                                    .addComponent(txtDbp, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblSbp, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(82, 82, 82)
-                                    .addComponent(txtSbp, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(126, 126, 126)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblDbp, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(82, 82, 82)
+                                        .addComponent(txtDbp, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(lblSbp, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(82, 82, 82)
+                                        .addComponent(txtSbp, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(lblRespirationRate)
                                     .addGap(82, 82, 82)
@@ -161,9 +161,7 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblSPO2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(lblBmi)))
+                                        .addComponent(lblBmi, javax.swing.GroupLayout.Alignment.TRAILING))
                                     .addGap(82, 82, 82)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtSPO2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +169,7 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(270, 270, 270)
                         .addComponent(btnUpdateVitalSigns)))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addGap(151, 151, 151))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,10 +208,15 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
                     .addComponent(txtBmi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdateVitalSigns)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(119, 119, 119))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    private String formatDate(Date date){
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(date);
+    }
+    
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         displayJPanel.remove(this);
@@ -234,7 +237,8 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
             vitalSigns.setTemperature(temperature);
             success = true;            
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(null, "Temperature must be Float."); 
+            JOptionPane.showMessageDialog(null, "Temperature must be Float.");
+            success = false;
         }
         
         try {
@@ -242,7 +246,8 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
             vitalSigns.setPulse(pulse);
             success = true;
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(null, "Pulse must be an Integer."); 
+            JOptionPane.showMessageDialog(null, "Pulse must be an Integer.");
+            success = false;
         }
         
         try {
@@ -250,7 +255,8 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
             vitalSigns.setSbp(sbp);
             success = true;
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(null, "Systolic BP must be Float."); 
+            JOptionPane.showMessageDialog(null, "Systolic BP must be Float.");
+            success = false;
         }
         
         try {
@@ -258,7 +264,8 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
             vitalSigns.setDbp(dbp);
             success = true;
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(null, "Diastolic BP must be Float."); 
+            JOptionPane.showMessageDialog(null, "Diastolic BP must be Float.");
+            success = false;
         }
         
         try {
@@ -266,7 +273,8 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
             vitalSigns.setRespirationRate(resprate);
             success = true;
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(null, "Respiration Rate must be an Integer."); 
+            JOptionPane.showMessageDialog(null, "Respiration Rate must be an Integer.");
+            success = false;
         }
         
         try {
@@ -274,7 +282,8 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
             vitalSigns.setSpo2(spo2);
             success = true;
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(null, "SpO2 must be Float."); 
+            JOptionPane.showMessageDialog(null, "SpO2 must be Float.");
+            success = false;
         }
                 
         try {
@@ -282,9 +291,11 @@ public class VitalSignsUpdateJPanel extends javax.swing.JPanel {
             vitalSigns.setBmi(bmi);
             success = true;
         } catch (NumberFormatException nfe) {
-            JOptionPane.showMessageDialog(null, "BMI must be Float."); 
+            JOptionPane.showMessageDialog(null, "BMI must be Float.");
+            success = false;
         }
         if (success) {
+            vitalSigns.setUpdatedOn(formatDate(new Date()));
             vitalSigns.setTemperature(Double.parseDouble(txtTemperature.getText()));
             vitalSigns.setPulse(Integer.parseInt(txtPulse.getText()));
             vitalSigns.setSbp(Double.parseDouble(txtSbp.getText()));

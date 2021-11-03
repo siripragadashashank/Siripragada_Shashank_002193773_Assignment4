@@ -4,21 +4,34 @@
  */
 package model;
 
+
+
 import java.util.ArrayList;
-import model.City;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 /**
  *
  * @author sirip
  */
 public class CityList {
-      private ArrayList<City> cities;
+    private static ArrayList<City> citiesList  = new ArrayList<City>(){
+        {
+            add(new City("Boston", new ArrayList<Community>()));
+        }   
+    };
 
-    public ArrayList<City> getCities() {
-        return cities;
+    public static ArrayList<City> getCitiesList() {
+        return citiesList;
     }
 
-    public void setCities(ArrayList<City> cities) {
-        this.cities = cities;
+    public static void setCitiesList(ArrayList<City> citiesList) {
+        CityList.citiesList = citiesList;
     }
-      
+    
+    public static void addCity(City cityName){
+        CityList.getCitiesList().add(cityName);
+    }
+    
 }
